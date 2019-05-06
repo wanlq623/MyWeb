@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wanlq的第一个简单博客</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>随笔
+            <small>--BY 万良琦</small>
+        </h2>
+    </div>
+</div>
+<div class="container page-body">
+    <div class="col-md-9" role="main">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">文章列表</div>
+            <!-- List group -->
+            <ul class="list-group">
+                {% for article in articles %}
+                    <li class="list-group-item">
+                        <h4><span class="glyphicon glyphicon-grain"
+                                  aria-hidden="true"></span> <a
+                                href="detail/{{ article.article_id }}">{{ article.title }}
+                        </a></h4>
+                        <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{ article.publish_date }}
+                        </p>
+                        <p>{{ article.brief_content }}</p>
+
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="body-footer">
+                <div class="col-md-3 col-md-offset-4">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li>
+                                <a href="/blog/index?page={{ previous_page }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% for num in page_num %}
+                                <li><a href="/blog/index?page={{ num }}">{{ num }}</a></li>
+                            {% endfor %}
+                            <li>
+                                <a href="/blog/index?page={{ next_page }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-3" role="complementary">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h4>TOP10文章</h4></div>
+            <!-- List group -->
+            <ul class="list-group">
+                {% for article in top10_article_list %}
+                    <li class="list-group-item">
+                        <h5><span class="glyphicon glyphicon-grain"
+                                  aria-hidden="true"></span> <a
+                                href="detail/{{ article.article_id }}">{{ article.title }}</a></h5>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

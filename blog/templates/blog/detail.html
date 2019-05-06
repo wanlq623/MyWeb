@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wanlq的第一个简单博客</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>随笔
+            <small>--BY 万良琦</small>
+        </h2>
+    </div>
+</div>
+<div class="col-md-10 col-md-offset-1 page-header">
+    <h1>{{ title }}
+        <small>{{ publish_date }}</small>
+    </h1>
+</div>
+<div class="col-md-10 col-md-offset-1 container page-main">
+    <div>
+        {% for content in content_list %}
+            <p>{{ content }}</p>
+        {% endfor %}
+    </div>
+</div>
+<div class="col-md-10 col-md-offset-1 ">
+    <nav aria-label="上下翻页">
+        <ul class="pager">
+            <li class="previous"><a href="{{ previous_article.article_id }}"><span aria-hidden="true">&larr;</span>
+                上一篇:{{ previous_article.title }}</a></li>
+            <li class="next"><a href="{{ next_article.article_id }}">下一篇:{{ next_article.title }} <span
+                    aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
