@@ -24,20 +24,16 @@
         <h2>随笔
             <small>--BY 万良琦</small>
         </h2>
-        <form class="form-inline" action="/blog/search_title" method="get">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="title">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜索</button>
-        </form>
     </nav>
     <br/>
     <div class="row">
-        <div class="col-md-7 offset-md-1" role="main">
+        <div class="col-md-8 offset-md-2">
             <div class="card">
                 <h5 class="card-header">
-                    文章列表
+                    搜索结果
                 </h5>
                 <div class="list-group">
-                    {% for article in articles %}
+                    {% for article in article_list %}
                         <a href="/blog/detail/{{ article.article_id }}"
                            class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
@@ -47,37 +43,10 @@
                             <br/>
                             <p class="mb-1">{{ article.brief_content }}</p>
                         </a>
+                    {% empty %}
+                        您搜索的结果不存在！请重新搜索。
                     {% endfor %}
                 </div>
-            </div>
-            <div class="body-footer">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item">
-                            <a class="page-link" href="/blog/index?page={{ previous_page }}" tabindex="-1">上一页</a>
-                        </li>
-                        {% for num in page_num %}
-                            <li class="page-item"><a class="page-link"
-                                                     href="/blog/index?page={{ num }}">{{ num }}</a>
-                            </li>
-                        {% endfor %}
-                        <li class="page-item">
-                            <a class="page-link" href="/blog/index?page={{ next_page }}">下一页</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div class="col-md-3" role="complementary">
-            <div class="card">
-                <h5 class="card-header">TOP10文章</h5>
-                <ul class="list-group">
-                    {% for article in top10_article_list %}
-                        <li class="list-group-item">
-                            <a href="/blog/detail/{{ article.article_id }}"> {{ article.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
             </div>
         </div>
     </div>

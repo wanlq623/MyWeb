@@ -4,42 +4,48 @@
     <meta charset="UTF-8">
     <title>Wanlq的第一个简单博客</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="panel panel-default">
-    <div class="panel-body">
+<div class="p-3 mb-2 bg-light text-dark">
+    <nav class="navbar navbar-light" style="background-color: #FFFFFF;">
+        <!-- Navbar content -->
         <h2>随笔
             <small>--BY 万良琦</small>
         </h2>
-    </div>
-</div>
-<div class="col-md-10 col-md-offset-1 page-header">
-    <h1>{{ title }}
-        <small>{{ publish_date }}</small>
-    </h1>
-</div>
-<div class="col-md-10 col-md-offset-1 container page-main">
-    <div>
-        {% for content in content_list %}
-            <p>{{ content }}</p>
-        {% endfor %}
-    </div>
-</div>
-<div class="col-md-10 col-md-offset-1 ">
-    <nav aria-label="上下翻页">
-        <ul class="pager">
-            <li class="previous"><a href="{{ previous_article.article_id }}"><span aria-hidden="true">&larr;</span>
-                上一篇:{{ previous_article.title }}</a></li>
-            <li class="next"><a href="{{ next_article.article_id }}">下一篇:{{ next_article.title }} <span
-                    aria-hidden="true">&rarr;</span></a></li>
-        </ul>
+        <form class="form-inline" action="/blog/search_title" method="get">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="title">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜索</button>
+        </form>
     </nav>
+    <br/>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h3 class="mb-1">{{ title }}</h3>
+                    <p class="text-right">{{ publish_date }}</p>
+                    <br/>
+                    {% for content in content_list %}
+                        <p class="text-justif">{{ content }}</p>
+                    {% endfor %}
+                </li>
+            </ul>
+            <p>上一篇：<a href="/blog/detail/{{ previous_article.article_id }}">{{ previous_article.title }}</a></p>
+            <p>下一篇：<a href="/blog/detail/{{ next_article.article_id }}">{{ next_article.title }}</a></p>
+        </div>
+    </div>
 </div>
 </body>
 </html>

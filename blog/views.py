@@ -17,7 +17,7 @@ def get_index_page(request):
     # 获取按照时间倒叙排序最新10片文章
     top10_article_list = Article.objects.order_by('-publish_date')[:10]
     # 生成分页组件，每页为4
-    paginator = Paginator(all_article, 10)
+    paginator = Paginator(all_article, 6)
     # 定义文章数量变量page_num
     page_num = paginator.num_pages
     # 获取某一页的文章列表
@@ -72,3 +72,12 @@ def get_detail_page(request, article_id):
     return render(request, 'blog/detail.html',
                   {'title': title, 'content_list': content_list, 'previous_article': previous_article,
                    'next_article': next_article, 'publish_date': publish_date})
+
+
+# 定义根据名称搜索文章函数
+def search_title(request):
+    # 获取输入的搜索title值
+    title = request.GET.get('title')
+    # 根据title值模糊查询
+    article_list = Article.objects.filter(title__contains=title)
+    return render(request, 'blog/search_result.html', {'article_list': article_list})
